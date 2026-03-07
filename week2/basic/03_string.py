@@ -25,6 +25,25 @@
 """
 
 def is_palindrome(s):
+    #소문자로
+    s = s.lower()
+
+    #공백 없애기
+    # s = s.replace(" ","")
+
+    #특수 문자, 공백 없애기
+    s = ''.join(c for c in s if c.isalnum())
+        #if(s[i].isalnum() == False):
+           #s = s.replace(s[i], "")
+        
+    reverse_s = s[::-1]
+
+    if(s == reverse_s):
+        return True
+    else:
+        return False
+
+
     """
     문자열이 회문인지 판별하는 함수
     
