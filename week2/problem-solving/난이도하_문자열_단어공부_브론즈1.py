@@ -35,8 +35,8 @@ for i in range(len(alphabet)):
 
 
 for i in range(len(s)):
-    if(s[i] == '\n'):
-        break
+    # if(s[i] == '\n'):
+    #     break
     my_dict[s[i]] += 1
 
 value_list = []

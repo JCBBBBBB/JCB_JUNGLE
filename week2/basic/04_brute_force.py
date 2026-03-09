@@ -40,6 +40,15 @@ def find_two_sum_pairs(nums, target):
     pairs = []
     n = len(nums)
     
+	#마지막 전 순서까지
+    for i in range(len(nums)-1):
+        # i+1 순서부터 마지막까지
+        for j in range(i+1, len(nums)):
+            # 두개의 합이 target 일때 (i < j 유지) i, j 인덱스를 tuple로 리스트에 넣어준다
+            if((nums[i] + nums[j]) == target):
+                pairs.append((i,j)) #list에 (i,j)를 출력한다
+
+    return pairs
     # TODO: 이중 반복문으로 모든 쌍을 확인하세요
     ## 외부 반복문: i는 0부터 n-1까지
     ## 내부 반복문: j는 i+1부터 n까지 (중복 방지)

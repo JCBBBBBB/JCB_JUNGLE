@@ -43,6 +43,19 @@ def combinations(n, k):
             start: 탐색을 시작할 숫자
             current_combination: 현재까지 선택한 숫자들
         """
+        #현재 선택한 숫자들이 k개면 result에 넣어줘야지 ->왜냐하면 k개를 선택하는 거니까 다한거여서 추가하고 return
+        if(len(current_combination) == k):
+            result.append(current_combination[:]) # 그냥 current_combination을 넣으면 주소값만 넣는 거기 때문에 참조되어서 값이 바뀌면 result 안의 값도 바뀐다, 리스트 복사 해주는 것
+            return
+
+        for i in range(start, n+1): # start(탐색 시작할 숫자)부터 마지막 숫자까지
+
+            current_combination.append(i) # 현재까지 선택한 숫자들 리스트에 i를 추가한다   #선택
+            backtrack(i + 1, current_combination) # i+1의 숫자부터 재귀, 중복이 안되니까 i의 다음숫자부터   #탐색
+            current_combination.pop() #return 하면 여기로 온다. 결과값에 넣어줬으니까 리스트의 맨 뒷자리 수를 지워준다. #취소
+
+
+
         # TODO: base case - k개를 모두 선택했으면 결과에 추가
         pass
         
