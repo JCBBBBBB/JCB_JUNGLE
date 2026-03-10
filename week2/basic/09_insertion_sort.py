@@ -22,6 +22,13 @@
 - 삽입 위치를 찾기 위해 뒤에서 앞으로 비교
 """
 
+# 내가 생각한 문제해결 흐름:
+# for문 두번째 인덱스부터 마지막까지 회전 돌리고
+# for문 
+#
+#
+
+
 def insertion_sort(arr):
     """
     삽입 정렬 구현
@@ -34,11 +41,17 @@ def insertion_sort(arr):
     """
     n = len(arr)
     
+    for i in range(1, n): #마지막까지 인덱스 돈다
+        for j in range(i, 0, -1): #비교할려고 도는거
+            if(arr[j] <= arr[j-1]): #인덱스 다르고 기준점 숫자가 비교하는 숫자보다 더 작으면
+                arr[j], arr[j-1] = arr[j-1], arr[j]
+
+
     # TODO: 두 번째 원소(인덱스 1)부터 시작
     ## 각 원소를 정렬된 부분에 삽입
     ## 현재 원소를 key에 저장    
     ## key를 삽입할 위치 찾기
-    ## j는 key 바로 앞 인덱스부터 시작
+    ## j는 key 바로 앞 인덱스부터 시작  
     ## arr[j] > key인 동안 원소를 오른쪽으로 이동
     ## 찾은 위치에 key 삽입
     pass
@@ -60,8 +73,10 @@ def insertion_sort_with_steps(arr):
         print(f"정렬된 부분: {arr[:i]}")
         
         # TODO: 삽입 위치 찾기 및 이동
-        pass
-        
+        # while j >= 0 and arr[j] > key:
+        #     arr[j + 1] = arr[j]  # 한 칸 오른쪽으로 밀기
+        #     j -= 1    
+
         arr[j + 1] = key
         print(f"삽입 후: {arr}")
     

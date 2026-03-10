@@ -34,6 +34,14 @@ def bubble_sort(arr):
     """
     n = len(arr)
     
+    # 우선 맨 마지막 인덱스는 자동으로 앞에 것들을 하면 저장되기 때문에 n-1번을 돌고
+    for j in range(n-1):
+        for i in range(n-1): #앞뒤로 바꿔주는 횟수   ex) 총 5개면 앞뒤로는 4번
+            if(arr[i] >= arr[i+1]): #앞에 것이 뒤에 것 보다 크면
+                arr[i], arr[i+1] = arr[i+1], arr[i] #서로 swap한다
+
+    # 여기서 문제점 : 
+
     # TODO: 외부 반복문 - n-1번 반복
     # 각 패스마다 가장 큰 원소가 끝으로 이동
     ## TODO: 내부 반복문 - 인접한 원소 비교
@@ -41,7 +49,7 @@ def bubble_sort(arr):
     ## TODO: 인접한 두 원소 비교 및 교환
     ## arr[j] > arr[j+1]이면 교환
     ## 외부 반복문: n-1번 실행
-    pass
+
         
     return arr
 
@@ -57,16 +65,22 @@ def bubble_sort_optimized(arr):
     """
     n = len(arr)
     
-    for i in range(n):
-        swapped = False  # 교환 발생 여부
+    # for i in range(n):
+    #     swapped = False  # 교환 발생 여부
         
         # TODO: 내부 반복문과 교환 로직 구현
-        # 교환이 발생하면 swapped = True 설정        
-        pass
-        
-
+        # 교환이 발생하면 swapped = True 설정 
+      
+    for j in range(n-1):
+        swapped = False #회차 돌 때마다 swapped = False로 정의해준다
+        for i in range(n-1): #앞뒤로 바꿔주는 횟수   ex) 총 5개면 앞뒤로는 4번
+            if(arr[i] >= arr[i+1]): #앞에 것이 뒤에 것 보다 크면
+                arr[i], arr[i+1] = arr[i+1], arr[i] #서로 swap한다
+                swapped = True # True란 뜻은 값을 바꿨다는 흔적
+        if(swapped == False): # 값을 안바꾼 뜻은 이제 다 정렬되어서 바꿀게 없다라는 뜻
+            break;
         # TODO: 교환이 없으면 이미 정렬된 것이므로 break
-        pass
+
 
     return arr
 
@@ -81,7 +95,8 @@ if __name__ == "__main__":
     print()
     
     # 테스트 케이스 2: 이미 정렬된 배열
-    arr2 = [1, 2, 3, 4, 5]
+    arr2 = [64, 34, 25, 12, 22, 11, 90]
+    #[1, 2, 3, 4, 5]
     print("=== 테스트 케이스 2: 이미 정렬됨 ===")
     print(f"정렬 전: {arr2}")
     result2 = bubble_sort_optimized(arr2.copy())

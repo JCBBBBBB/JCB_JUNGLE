@@ -32,12 +32,45 @@ def gcd(a, b):
         a, b: 두 양의 정수
     
     Returns:
-        최대공약수
+        최대공약수 
     """
+
+    #큰 수에서 작은 수 나눠서    ... 나머지
+    #나머지 0 아니면 나눠지는 수를 나머지로 나눈다
+    #나머지 0이면 나눠지는 몫이 최대공약수
+
+    #예시 (48, 18)
+    # 48 % 18 = 2 ... 12
+    # 18 % 12 = 1 ... 6
+    # 12 % 6 = 2 ... 0 -> 나머지가 0이므로 최대공약수는 6
+
+
+
+    max_num = max(a,b) # 큰 수
+    min_num = min(a,b) # 작은 수
+
+    temp_num = max_num % min_num # 큰 수와 작은 수를 나누었을 때의나머지
+    answer = 0 # 최대공약수
+
+    while True: # 나머지가 0이 나올때까지
+
+        if(temp_num != 0): # 나머지가 0이 아니면
+            max_num = min_num
+            min_num = temp_num
+            temp_num = max_num % min_num #나눠지는 수를 나머지로 나눈다
+        else: # 나머지가 0이면
+            answer = min_num
+            break
+
+    return answer
+
+
+
+
     # TODO: 유클리드 호제법 구현
     # base case: b가 0이면 a 반환
     # recursive를 이용 
-    pass
+    
 
 def gcd_iterative(a, b):
     """
@@ -49,9 +82,46 @@ def gcd_iterative(a, b):
     Returns:
         최대공약수
     """
+
+    # a,b의 공약수들을 담을 리스트 생성
+    a_remain_list = list()
+    b_remain_list = list()
+
+    # a,b의 최대공약수를 담을 리스트 생성
+    common_divisor = list()
+
+    # a 인덱스까지 for문을 돌며 나머지가 0인것들을 리스트에 넣는다
+    for i in range(1, a+1):
+        if(a % i == 0):
+            a_remain_list.append(i)
+
+    # b 인덱스까지 for문을 돌며 나머지가 0인것들을 리스트에 넣는다
+    for i in range(1, b+1):
+        if(b % i == 0):
+            b_remain_list.append(i)
+
+    # a 리스트를 기준으로 b 리스트 인덱스들을 돌면서 서로 같은 것들을 리스트에 넣는다 -> 공약수 넣는 것!
+    for i in range(len(a_remain_list)):
+        for j in range(len(b_remain_list)):
+            if(a_remain_list[i] == b_remain_list[j]):
+                common_divisor.append(a_remain_list[i])
+
+    # 거기서 가장 큰 게 최대공약수
+    answer = max(common_divisor)
+
+
+
+    return answer
+
+
+
+
+
+
+
     # TODO: 반복문으로 구현
     # b가 0이 될 때까지 반복
-    pass
+    
 
 def lcm(a, b):
     """
@@ -64,7 +134,18 @@ def lcm(a, b):
         최소공배수
     """
     # TODO: LCM 계산
-    pass
+
+    gcd_num = gcd(a,b) #최대공약수 계산
+
+    # 각 수를 최대공약수로 나눈다
+    a_divide_gcd = a / gcd_num
+    b_divide_gcd = b / gcd_num
+
+    # 최대공약수와 저 값들을 곱한다
+    lcm_num = gcd_num * a_divide_gcd * b_divide_gcd
+
+    return int(lcm_num)
+    
 
 def extended_gcd(a, b):
     """
@@ -93,6 +174,20 @@ def is_prime(n):
     Returns:
         소수이면 True, 아니면 False
     """
+    #약수 리스트
+    decide_list = list()
+
+    #1부터 자기자신 인덱스까지 돌면서
+    for i in range(1, n+1):
+        if(n % i == 0): #i로 나눠지는 거를
+            decide_list.append(i) #리스트에 넣는다
+
+    if(len(decide_list) == 2): #개수가 2개면 소수이다
+        return True
+    else:
+        return False
+
+
     # TODO: 소수 판별 구현
     # n이 2보다 작으면 False
     # 2부터 sqrt(n)까지 나누어 떨어지는지 확인    
@@ -103,7 +198,7 @@ def is_prime(n):
 if __name__ == "__main__":
     # 테스트 케이스 1: GCD와 LCM
     print("=== 테스트 케이스 1: GCD와 LCM ===")
-    a, b = 48, 18
+    a, b = 8, 48
     print(f"a = {a}, b = {b}")
     print(f"GCD (재귀): {gcd(a, b)}")
     print(f"GCD (반복): {gcd_iterative(a, b)}")
