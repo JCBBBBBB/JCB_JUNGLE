@@ -26,7 +26,44 @@
 
 from collections import deque
 
-def process_print_queue(jobs):
+
+
+def process_print_queue(jobs):  # jobs = ['문서A', '문서B', '문서C']
+
+    # 먼저 처리한 순서대로 넣는 리스트
+    result = []
+
+    while(len(jobs) != 0): # 리스트가 비어있지 않으면
+        result.append(jobs[0]) # result에 앞 부터 넣는다
+        print(f'처리: {jobs.pop(0)}') #jobs의 맨 앞부터 pop처리
+
+    return result
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     """
     프린터 작업을 순서대로 처리
     

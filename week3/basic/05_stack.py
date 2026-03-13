@@ -26,6 +26,58 @@
 """
 
 def is_valid_parentheses(s):
+
+    stack = []
+
+    #문자열 돌면서
+    for ch in s:
+        if(ch == '('): #문자열이 ( 이면
+            stack.append(ch) # stack 배열에 (를 넣는다
+        elif(ch == ')'): # 문자열이 ) 이면
+            if(stack): # stack 값이 있으면
+                stack.pop() # pop을 한다
+            else: # stack에 값이 없으면
+                return False # False 반환
+            
+    return len(stack) == 0 #비어있으면 true, 있으면 False
+
+
+
+
+
+    for i in range(len(s)):
+        if(s[i] == '('):
+            stack.append(s[i])
+        else:
+            if(s[i] == ')'):
+                if(len(stack) != 0 and stack[-1] == '('):
+                    stack.pop()
+                else:
+                    return False
+                
+    if(len(stack) == 0):
+        return True
+    else:
+        return False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     """
     괄호 짝이 맞는지 확인
     
@@ -76,4 +128,7 @@ if __name__ == "__main__":
     print(f"입력: {test4}")
     print(f"결과: {result4}")
 
-
+    test5 = "())(()"
+    result5 = is_valid_parentheses(test5)
+    print(f"입력: {test5}")
+    print(f"결과: {result5}")

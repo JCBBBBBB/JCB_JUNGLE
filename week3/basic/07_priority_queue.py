@@ -27,6 +27,43 @@
 import heapq
 
 def process_emergency_room(patients):
+
+    pq = []
+    result = []
+
+    #patients를 돌면서
+    for i in range(len(patients)): #앞 뒤를 바꿔야한다
+        new_tuple = (patients[i][1], patients[i][0]) #tuple을 새로만든다(순위가 앞에 와야돼서)
+        heapq.heappush(pq, new_tuple) # 최소힙에 new tuple을 넣는다
+
+    while pq: # 최소힙 값이 있으면
+        rank, name = heapq.heappop(pq)# pq를 pop처리하는데 변수 처리를 한다(rank, name)
+        result.append(name) #result 리스트에 name을 넣는다
+        print(f"처리: {name} (우선순위: {rank})")
+
+
+    return result
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     """
     환자를 우선순위에 따라 처리
     
