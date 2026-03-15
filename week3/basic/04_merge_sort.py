@@ -22,7 +22,7 @@
 - 정렬된 두 부분을 병합
 """
 
-def merge(arr, left, mid, right):
+def merge(arr, left, mid, right): # 나눈 두 부분 정렬하면서 다시 합침
     """
     두 개의 정렬된 부분 배열을 병합하는 함수
     
@@ -32,6 +32,36 @@ def merge(arr, left, mid, right):
         mid: 왼쪽 부분의 끝 인덱스
         right: 오른쪽 부분의 끝 인덱스
     """
+
+    left_arr = arr[left:mid+1]
+    right_arr = arr[mid+1:right+1]
+
+    i = 0
+    j = 0
+    result = []
+
+    while(i < len(left_arr) and j < len(right_arr)):
+        if(left_arr[i] < right_arr[j]):
+            result.append(left_arr[i])
+            i += 1
+        else:
+            result.append(right_arr[j])
+            j += 1
+
+    result.extend(left_arr[i:])
+    result.extend(right_arr[j:])
+
+
+    for i in range(len(result)):
+        arr[left + i] = result[i]
+
+
+
+
+
+
+
+
     # TODO: 왼쪽과 오른쪽 부분 배열을 임시 배열로 복사
     
     # TODO: 두 배열을 병합
@@ -44,7 +74,7 @@ def merge(arr, left, mid, right):
     # right_arr에 남은 원소가 있으면 복사
     
 
-def merge_sort_helper(arr, left, right):
+def merge_sort_helper(arr, left, right): # 배열 반으로 계속 나눔
     """
     머지 정렬 재귀 함수
     
@@ -53,12 +83,16 @@ def merge_sort_helper(arr, left, right):
         left: 시작 인덱스
         right: 끝 인덱스
     """
+    if(left >= right):
+        return
+ 
+    mid = int((left+right) / 2)
+    merge_sort_helper(arr, left, mid) # left mid 번호 확정
+    merge_sort_helper(arr,mid + 1,right) # mid right 번호 확정
+
+    merge(arr, left, mid, right) # 이제 합쳐서 원본 바꾼다
+
     # TODO: base case - left가 right보다 작을 때만 정렬
-    if(left < right):
-        mid = int((left + right) / 2)
-        merge_sort_helper(arr, left, mid)
-        merge_sort_helper(arr,mid,right)
-        merge(arr,left,mid,right)
 
     ## 중간 지점 계산
     ## 왼쪽 절반 재귀 정렬
