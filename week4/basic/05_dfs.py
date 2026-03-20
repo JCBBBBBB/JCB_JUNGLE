@@ -43,14 +43,26 @@ def dfs(graph, start, visited=None):
         방문 순서 리스트
     """
     # TODO: visited가 None이면 초기화
-    pass
+    if(visited == None):
+        visited = []
     
     # TODO: 현재 정점 방문
-    pass
+    stack = [] #방문 처리 할 스택 생성
+
+    stack.append(start) #stack에 현재 위치 추가
+    visited.append(start) #visited에 현재 위치 방문 처리
     
     # TODO: 인접한 정점들에 대해 재귀
     ## 방문하지 않은 정점이면 재귀 호출
-    pass
+    while(stack):
+        cur = stack.pop() #스택의 마지막 pop
+
+        for nx in graph[cur]:
+            if(nx < 0 or nx > 3):
+                continue
+            if(nx not in visited): #nx가 visited에 없으면
+                stack.append(nx)
+                visited.append(nx)
     
     return visited
 
