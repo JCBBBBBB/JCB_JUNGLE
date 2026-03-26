@@ -30,6 +30,18 @@ DFS: [0, 1, 2, 3] (순서는 구현에 따라 다를 수 있음)
 - 깊이 우선으로 방문
 """
 
+def dfs_recursive(graph, start, visited = None):
+    if visited is None:
+        visited = []
+
+    visited.append(start)
+
+    for next in graph[start]:
+        if(next not in visited):
+            dfs_recursive(graph,next, visited)
+
+    return visited
+
 def dfs(graph, start, visited=None):
     """
     깊이 우선 탐색 (재귀)
@@ -47,22 +59,21 @@ def dfs(graph, start, visited=None):
         visited = []
     
     # TODO: 현재 정점 방문
-    stack = [] #방문 처리 할 스택 생성
+    # stack = [] #방문 처리 할 스택 생성
 
-    stack.append(start) #stack에 현재 위치 추가
-    visited.append(start) #visited에 현재 위치 방문 처리
+    # stack.append(start) #stack에 현재 위치 추가
     
     # TODO: 인접한 정점들에 대해 재귀
     ## 방문하지 않은 정점이면 재귀 호출
     while(stack):
         cur = stack.pop() #스택의 마지막 pop
 
+        if(cur not in visited):
+            visited.append(cur)
+
         for nx in graph[cur]:
-            if(nx < 0 or nx > 3):
-                continue
-            if(nx not in visited): #nx가 visited에 없으면
+            if(nx not in visited):
                 stack.append(nx)
-                visited.append(nx)
     
     return visited
 
@@ -70,15 +81,16 @@ def dfs(graph, start, visited=None):
 if __name__ == "__main__":
     # 그래프 생성
     graph = {
-        0: [1, 2],
-        1: [0, 2],
-        2: [0, 1, 3],
-        3: [2]
+        # 0: [1, 2],
+        1: [2, 3],
+        2: [4],
+        3: [],
+        4: []
     }
     
     print("=== DFS (깊이 우선 탐색) ===")
-    result = dfs(graph, 0)
-    print(f"시작 정점: 0")
+    result = dfs(graph, 1)
+    print(f"시작 정점: 1")
     print(f"방문 순서: {result}")
 
 
