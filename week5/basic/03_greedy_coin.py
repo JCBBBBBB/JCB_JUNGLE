@@ -29,7 +29,7 @@
 - 나머지 금액으로 다음 동전 사용
 """
 
-def make_change_greedy(change, coins):
+def make_change_greedy(change, coins): #1260 [500,100,50,10]
     """
     그리디 알고리즘으로 거스름돈 계산
     
@@ -46,8 +46,17 @@ def make_change_greedy(change, coins):
     # TODO: 각 동전에 대해 반복
     ## 현재 동전으로 거슬러줄 수 있는 개수 계산    
     ## 개수가 0보다 크면 결과에 추가
-    pass
-    
+    for i in range(len(coins)):
+        share = change // coins[i]
+        change = change % coins[i]
+
+        if(share > 0):
+            result[coins[i]] = share
+            total_coins += share
+        if(change == 0):
+            break
+
+
     return total_coins, result
 
 # 테스트 케이스
