@@ -5,25 +5,29 @@
 import re
 import this
 
-example = str(input())
 
-example = example.split('-')
-# 55  -   50+40   -   30+20
 
-#55   50\
-temp_sum = 0
-for i in range(len(example)):
-    if(example[i] == ''):
+# 55-50+40    #-50-50-50    #10+20+30+40    #00009-00009
+sentence = str(input())
+
+# 55, 50+40   '' 50 50 50         10+20+30+40        00009   00009
+sentence = sentence.split('-')
+
+answer = 0
+for i in range(len(sentence)):
+    if(sentence[i] == ''):
         continue
-    temp = example[i].split('+')
-    for j in range(len(temp)): #int 변환
+    
+    # 50+40
+    temp = sentence[i].split('+')
+
+    for j in range(len(temp)): #문자열로 저장된 sentence를 정수로 바꿔준다
         temp[j] = int(temp[j])
 
-    if i==0:
-        temp_sum += sum(temp)
+
+    if(i == 0):
+        answer += sum(temp)
     else:
-        temp_sum -= sum(temp)   # 90   50
+        answer -= sum(temp)
 
-
-print(temp_sum)
-
+print(answer)
